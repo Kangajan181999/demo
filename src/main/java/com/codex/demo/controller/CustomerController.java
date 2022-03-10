@@ -30,4 +30,9 @@ public class CustomerController {
     public List<Customer> getAllCustomer(){
         return customerService.getAllCustomer();
     }
+
+    @GetMapping("/login")
+    public ResponseEntity<Map<String,Boolean>> login(@RequestParam String email,@RequestParam String password){
+        return customerService.login(email,password);
+    }
 }
