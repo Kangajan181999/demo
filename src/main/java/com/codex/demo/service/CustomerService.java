@@ -12,4 +12,6 @@ public interface CustomerService {
     ResponseEntity<Map<String,Boolean>> save(CustomerDTO customerDto);
 
     List<Customer> getAllCustomer();
+
+    ResponseEntity<Map<String, Boolean>> login(String email, String password);
 }

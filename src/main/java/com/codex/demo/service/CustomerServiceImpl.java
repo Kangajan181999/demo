@@ -1,6 +1,7 @@
 package com.codex.demo.service;
 
 import com.codex.demo.dto.CustomerDTO;
+import com.codex.demo.exception.CustomerNotFoundException;
 import com.codex.demo.model.Customer;
 import com.codex.demo.repository.CustomerRepository;
 import org.modelmapper.ModelMapper;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.TreeMap;
 
 @Service
@@ -35,6 +37,22 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public List<Customer> getAllCustomer() {
         return customerRepository.findAll();
+    }
+
+    @Override
+    public ResponseEntity<Map<String, Boolean>> login(String email, String password) {
+        Optional<Customer> optionalCustomer = this.customerRepository.findByEmail(email);
+        Map<String,Boolean> map = new TreeMap<>();
+        if(optionalCustomer.isPresent()){
+            if(password.trim().equals(optionalCustomer.get().getPassword())){
+                map.put("Successfully login",true);
+            }else{
+                map.put("Successfully login",false);
+            }
+        }else{
+            throw new CustomerNotFoundException();
+        }
+        return ResponseEntity.ok(map);
     }
 
 
