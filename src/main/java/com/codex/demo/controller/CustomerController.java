@@ -35,4 +35,9 @@ public class CustomerController {
     public ResponseEntity<Map<String,Boolean>> login(@RequestParam String email,@RequestParam String password){
         return customerService.login(email,password);
     }
+
+    @GetMapping("{customerId}")
+    public Customer getById(@PathVariable Long customerId){
+        return customerService.getById(customerId);
+    }
 }

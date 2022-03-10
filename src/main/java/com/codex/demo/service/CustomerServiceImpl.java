@@ -4,6 +4,7 @@ import com.codex.demo.dto.CustomerDTO;
 import com.codex.demo.exception.CustomerNotFoundException;
 import com.codex.demo.model.Customer;
 import com.codex.demo.repository.CustomerRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import java.util.Optional;
 import java.util.TreeMap;
 
 @Service
+@Slf4j
 public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepository customerRepository;
@@ -53,6 +55,11 @@ public class CustomerServiceImpl implements CustomerService {
             throw new CustomerNotFoundException();
         }
         return ResponseEntity.ok(map);
+    }
+
+    @Override
+    public Customer getById(Long customerId) {
+        return customerRepository.findById(customerId).get();
     }
 
 
