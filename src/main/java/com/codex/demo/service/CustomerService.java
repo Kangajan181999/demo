@@ -14,4 +14,6 @@ public interface CustomerService {
     List<Customer> getAllCustomer();
 
     ResponseEntity<Map<String, Boolean>> login(String email, String password);
+
+    Customer getById(Long customerId);
 }
