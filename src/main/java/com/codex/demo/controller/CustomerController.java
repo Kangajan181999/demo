@@ -23,6 +23,8 @@ public class CustomerController {
 
     @PostMapping
     public ResponseEntity<Map<String,Boolean>> save(@RequestBody CustomerDTO customerDto){
+        //get password encription and save
+
         return customerService.save(customerDto);
     }
 
